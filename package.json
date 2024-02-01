@@ -4,10 +4,20 @@
   "description": "A API using Node.js and Express",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
   },
   "type": "module",
-  "keywords": ["node", "alura", "express", "mongodb", "api"],
+  "keywords": [
+    "node",
+    "alura",
+    "express",
+    "mongodb",
+    "api"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
