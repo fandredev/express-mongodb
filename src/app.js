@@ -2,6 +2,8 @@ import express from 'express'
 import searchBook, {findIndexBook, listBooks} from './utils/book-search.js'
 import connectDatabase from './config/db-connect.js'
 
+import book from './models/Book.js'
+
 const database = await connectDatabase()
 database.on('error', (error) => console.log(`Error connecting to the database: ${error}`))
 database.once('open', () => console.log(`Connected to the database`))
@@ -22,7 +24,8 @@ app.get('/authors', (req, res) => {
   res.status(200).send('List of authors')
 })
 
-app.get('/books', (req, res) => {
+app.get('/books', async (req, res) => {
+  const books = await book.find({})
   res.status(200).json(books)
 })
 
