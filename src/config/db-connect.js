@@ -1,7 +1,7 @@
 import moongose from 'mongoose'
 
 export default async function connectDatabase() {
-  const uri = "mongodb+srv://admin:uKGjBrslVituB2ZY@cluster0.i7lwyms.mongodb.net/bookstore?retryWrites=true&w=majority";
+  const uri = process.env.MONGO_DB_ATLAS_CONNECTION
 
   await moongose.connect(uri) // Connect to the database
   return moongose.connection; // Return the connection
