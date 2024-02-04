@@ -1,0 +1,12 @@
+{
+    "window.zoomLevel": 0,
+    "editor.fontSize": 16,
+    "explorer.compactFolders": false,
+    "[typescript]": {
+        "editor.tabSize": 2,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true,
+            "source.fixAll.tslint": true
+        }
+    }
+}
