@@ -14,7 +14,7 @@ const bookSchema = new moongose.Schema({
   }, number_of_pages: {
     type: Number
   }
-}, {versionKey: false})
+}, { versionKey: false })
 
 // Criando um modelo para o livro
 const book = moongose.model('books', bookSchema)

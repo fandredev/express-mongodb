@@ -7,7 +7,7 @@ class BookController {
       res.status(200).json(allBooks)
     }
     catch (error) {
-      res.status(500).json({ message: `${error.message} - Não foi possível listar os livros.` })
+      res.status(500).json({ message: `${error.message} - Unable to list books.` })
     }
   }
 
@@ -22,7 +22,7 @@ class BookController {
       }
     }
     catch (error) {
-      res.status(500).json({ message: `${error.message} - Não foi possível encontrar o livro.` })
+      res.status(500).json({ message: `${error.message} - Unable to find the book.` })
     }
   }
 
@@ -35,7 +35,7 @@ class BookController {
       })
     }
     catch (error) {
-      res.status(500).json({ message: `${error.message} - Não foi possível cadastrar um livro.` })
+      res.status(500).json({ message: `${error.message} - Unable to register a book.` })
     }
   }
 
