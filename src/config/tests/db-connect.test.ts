@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 describe('Testing the database connection', () => {
   beforeEach(async () => {
-    await mongoose.connect('mongodb+srv://admin:uKGjBrslVituB2ZY@cluster0.i7lwyms.mongodb.net/bookstore?retryWrites=true&w=majority');
+    await mongoose.connect(process.env.MONGO_DB_ATLAS_CONNECTION as string);
   });
 
   afterEach(async () => {
