@@ -1,0 +1,1 @@
+export const mockAuthors = [{ name: 'Author 1' }, { name: 'Author 2' }];

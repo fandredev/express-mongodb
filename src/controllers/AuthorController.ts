@@ -1,10 +1,10 @@
-import { author as authors } from '../models/Author.js';
+import { author } from '../models/Author';
 import { Request, Response } from 'express';
 
 class AuthorController {
   static async index(req: Request, res: Response) {
     try {
-      const allAuthors = await authors.find({});
+      const allAuthors = await author.find({});
       res.status(200).json(allAuthors);
     }
     catch (error: unknown) {
@@ -17,7 +17,7 @@ class AuthorController {
   static async show(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const authorsFound = await authors.findById(id);
+      const authorsFound = await author.findById(id);
       if (authorsFound) {
         res.status(200).json(authorsFound);
       } else {
@@ -32,7 +32,7 @@ class AuthorController {
 
   static async create(req: Request, res: Response) {
     try {
-      const newAuthor = await authors.create(req.body);
+      const newAuthor = await author.create(req.body);
       res.status(201).json({
         message: 'Author created',
         newAuthor
@@ -47,7 +47,7 @@ class AuthorController {
   static async update(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      await authors.findByIdAndUpdate(id, req.body);
+      await author.findByIdAndUpdate(id, req.body);
       res.status(200).json({ message: 'Author updated' });
     } catch (error) {
       if (error instanceof Error)
@@ -58,7 +58,7 @@ class AuthorController {
   static async destroy(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      await authors.findByIdAndDelete(id);
+      await author.findByIdAndDelete(id);
       res.status(200).json({ message: 'Author deleted' });
     } catch (error) {
       if (error instanceof Error)

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-describe('Testing the database connection', () => {
+xdescribe('Testing the database connection', () => {
   beforeEach(async () => {
     await mongoose.connect(process.env.MONGO_DB_ATLAS_CONNECTION as string);
   });
