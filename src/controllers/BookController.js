@@ -1,4 +1,5 @@
 import books from '../models/Book.js'
+import { author as authors } from '../models/Author.js'
 
 class BookController {
   static async index(req, res) {
@@ -10,6 +11,7 @@ class BookController {
       res.status(500).json({ message: `${error.message} - Unable to list books.` })
     }
   }
+
 
   static async show(req, res) {
     try {
@@ -26,12 +28,33 @@ class BookController {
     }
   }
 
-  static async create(req, res) {
+  static async showByEditor(req, res) {
+    const editor = req.query.q
     try {
-      const newBook = await books.create(req.body)
+      const booksByQuery = await books.find({ editor })
+      if (booksByQuery.length > 0) {
+        res.status(200).json(booksByQuery)
+      } else {
+        res.status(404).send(`Books by ${editor} parameter not found`)
+      }
+    }
+    catch (error) {
+      res.status(500).json({ message: `${error.message} - Unable to find the books.` })
+    }
+  }
+
+  static async create(req, res) {
+    const newBook = req.body
+    try {
+      const authorFound = await authors.findById(newBook.author)
+      const bookComplete = { ...newBook, author: {
+        ...authorFound._doc
+      } }
+      const bookCreated = new books(bookComplete)
+
       res.status(201).json({
         message: 'Book created',
-        newBook
+        bookCreated
       })
     }
     catch (error) {
