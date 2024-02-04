@@ -1,7 +1,7 @@
 import moongose from 'mongoose'
 
 export default async function connectDatabase() {
-  const uri = process.env.MONGO_DB_ATLAS_CONNECTION
+  const uri = process.env.MONGO_DB_ATLAS_CONNECTION as string
 
   await moongose.connect(uri) // Connect to the database
   return moongose.connection; // Return the connection

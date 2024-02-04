@@ -14,10 +14,10 @@ export function listBooks() {
     return defaultBooks
 }
 
-export function findIndexBook(id) {
+export function findIndexBook(id: number) {
     return defaultBooks.findIndex(book => book.id === +id)
 }
 
-export default function searchBook(id) {
+export default function searchBook(id: number) {
     return defaultBooks.find(book => book.id === +id)
 }
