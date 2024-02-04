@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 import 'dotenv/config';
 
 describe('Testing the database connection', () => {
@@ -10,7 +10,7 @@ describe('Testing the database connection', () => {
     await mongoose.connection.close();
   });
 
-  it("should be check mongoose connection is 'connect' when beforeEach is called", async () => {
+  it('should be check mongoose connection is \'connect\' when beforeEach is called', async () => {
     expect(await mongoose.connection.readyState).toBe(1);
   });
-})
+});
