@@ -1,1 +1,5 @@
-export const mockAuthors = [{ name: 'Author 1' }, { name: 'Author 2' }];
+import Chance from 'chance';
+
+const chance = new Chance();
+
+export const mockAuthors = [{ name: chance.name() }, { name: chance.name() }];
