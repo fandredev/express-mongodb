@@ -1,19 +1,22 @@
 import books from '../models/Book.js'
 import { author as authors } from '../models/Author.js'
+import { Request, Response } from 'express';
 
 class BookController {
-  static async index(req, res) {
+  static async index(req: Request, res: Response) {
     try {
       const allBooks = await books.find({})
       res.status(200).json(allBooks)
     }
     catch (error) {
-      res.status(500).json({ message: `${error.message} - Unable to list books.` })
+      if (error instanceof Error)
+
+        res.status(500).json({ message: `${error.message} - Unable to list books.` })
     }
   }
 
 
-  static async show(req, res) {
+  static async show(req: Request, res: Response) {
     try {
       const id = req.params.id
       const bookFound = await books.findById(id)
@@ -24,11 +27,13 @@ class BookController {
       }
     }
     catch (error) {
-      res.status(500).json({ message: `${error.message} - Unable to find the book.` })
+      if (error instanceof Error)
+
+        res.status(500).json({ message: `${error.message} - Unable to find the book.` })
     }
   }
 
-  static async showByEditor(req, res) {
+  static async showByEditor(req: Request, res: Response) {
     const editor = req.query.q
     try {
       const booksByQuery = await books.find({ editor })
@@ -39,17 +44,21 @@ class BookController {
       }
     }
     catch (error) {
-      res.status(500).json({ message: `${error.message} - Unable to find the books.` })
+      if (error instanceof Error)
+
+        res.status(500).json({ message: `${error.message} - Unable to find the books.` })
     }
   }
 
-  static async create(req, res) {
+  static async create(req: Request, res: Response) {
     const newBook = req.body
     try {
       const authorFound = await authors.findById(newBook.author)
-      const bookComplete = { ...newBook, author: {
-        ...authorFound._doc
-      } }
+      const bookComplete = {
+        ...newBook, author: {
+          ...authorFound?.toObject()
+        }
+      }
       const bookCreated = new books(bookComplete)
 
       res.status(201).json({
@@ -58,27 +67,33 @@ class BookController {
       })
     }
     catch (error) {
-      res.status(500).json({ message: `${error.message} - Unable to register a book.` })
+      if (error instanceof Error)
+
+        res.status(500).json({ message: `${error.message} - Unable to register a book.` })
     }
   }
 
-  static async update(req, res) {
+  static async update(req: Request, res: Response) {
     try {
       const id = req.params.id
       await books.findByIdAndUpdate(id, req.body)
       res.status(200).json({ message: 'Book updated' })
     } catch (error) {
-      res.status(500).json({ message: `${error.message} - Unable to update the book.` })
+      if (error instanceof Error)
+
+        res.status(500).json({ message: `${error.message} - Unable to update the book.` })
     }
   }
 
-  static async destroy(req, res) {
+  static async destroy(req: Request, res: Response) {
     try {
       const id = req.params.id
       await books.findByIdAndDelete(id)
-      res.status(200).json({ message: 'Book deleted' })
+      res.status(200)
+        .json({ message: 'Book deleted' })
     } catch (error) {
-      res.status(500).json({ message: `${error.message} - Unable to delete the book.` })
+      if (error instanceof Error)
+        res.status(500).json({ message: `${error.message} - Unable to delete the book.` })
     }
   }
 }

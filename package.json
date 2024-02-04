@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "dev": "nodemon server.js"
+    "dev": "npx ts-node --esm server.ts"
   },
   "type": "module",
   "keywords": [
@@ -18,10 +18,13 @@
   "jest": {
     "transform": {}
   },
-  "author": "Felipe André",
+  "author": "Felipe André and Alura",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "dotenv": "^16.4.1",
