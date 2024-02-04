@@ -1,11 +1,11 @@
-import moongose from 'mongoose'
-import { authorSchema } from './Author.js'
+import moongose from 'mongoose';
+import { authorSchema } from './Author.js';
 
 // Criando um Schema para o livro
 
 const bookSchema = new moongose.Schema({
   id: {
-    type: moongose.Schema.Types.ObjectId,
+    type: moongose.Schema.Types.ObjectId
   }, title: {
     type: String, required: true
   }, editor: {
@@ -16,9 +16,9 @@ const bookSchema = new moongose.Schema({
     type: Number
   },
   author: authorSchema
-}, { versionKey: false })
+}, { versionKey: false });
 
 // Criando um modelo para o livro
-const book = moongose.model('books', bookSchema)
+const book = moongose.model('books', bookSchema);
 
-export default book
+export default book;

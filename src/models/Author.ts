@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 
 const authorSchema = new mongoose.Schema({
     id: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId
     },
     name: {
         type: String,
@@ -11,15 +11,15 @@ const authorSchema = new mongoose.Schema({
     },
     nacionality: {
         type: String,
-        default: "Brazilian"
-    },
+        default: 'Brazilian'
+    }
     }, { versionKey: false }
-)
+);
 
 
-const author = mongoose.model('authors', authorSchema)
+const author = mongoose.model('authors', authorSchema);
 
 export {
     author,
     authorSchema
-}
+};
