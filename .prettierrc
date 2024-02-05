@@ -2,6 +2,7 @@
   "singleQuote": true,
   "semi": true,
   "trailingComma": "none",
+  "tadWidth": 2,
   "overrides": [
     {
       "files": ["*.json", "*.yml", "*.yaml"],

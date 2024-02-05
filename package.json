@@ -47,13 +47,5 @@
     "mongoose": "^8.1.1",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*": "prettier --write"
   }
 }
