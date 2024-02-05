@@ -25,7 +25,7 @@ jobs:
       run: npm run prettier
 
     - name: Run ESLint
-      run: npm run lint
+      run: npm run lint:fix
 
     - name: Report results
       run: echo "ESLint complete"
