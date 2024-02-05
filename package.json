@@ -4,9 +4,11 @@
   "description": "A API using Node.js and Express",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --watchAll --coverage",
     "jest": "jest",
-    "dev": "npx ts-node --esm server.ts",
+    "dev": "npx ts-node --esm ./src/app.ts",
     "lint": "eslint src/**/*.ts",
     "prettier": "npx prettier --write src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
