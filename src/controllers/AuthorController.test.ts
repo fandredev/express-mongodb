@@ -4,9 +4,12 @@ import AuthorController from './AuthorController';
 import { StatusCodes } from 'http-status-codes';
 
 import { requestMock, responseMock } from '../config/mocks/requests.mock';
-import { mockAuthors, mockAuthorsFound, mockNewAuthor } from '../config/mocks/authors.mock';
+import {
+  mockAuthors,
+  mockAuthorsFound,
+  mockNewAuthor
+} from '../config/mocks/authors.mock';
 import generateRandomId from '../utils/generate-random-id';
-
 
 describe('AuthorController:', () => {
   const randomId = `_id${generateRandomId()}`;
@@ -53,8 +56,12 @@ describe('AuthorController:', () => {
 
     await AuthorController.show(requestMock, responseMock);
 
-    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(responseMock.json).toHaveBeenCalledWith({ message: `${errorMessage} - Unable to find the author.` });
+    expect(responseMock.status).toHaveBeenCalledWith(
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+    expect(responseMock.json).toHaveBeenCalledWith({
+      message: `${errorMessage} - Unable to find the author.`
+    });
   });
 
   it(`should create a new author and return status ${StatusCodes.CREATED}`, async () => {
@@ -82,8 +89,12 @@ describe('AuthorController:', () => {
 
     await AuthorController.create(requestMock, responseMock);
 
-    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(responseMock.json).toHaveBeenCalledWith({ message: `${errorMessage} - Unable to register a author.` });
+    expect(responseMock.status).toHaveBeenCalledWith(
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+    expect(responseMock.json).toHaveBeenCalledWith({
+      message: `${errorMessage} - Unable to register a author.`
+    });
   });
 
   it(`should update an author and return status ${StatusCodes.OK}`, async () => {
@@ -98,7 +109,9 @@ describe('AuthorController:', () => {
 
     expect(author.findByIdAndUpdate).toHaveBeenCalledWith(id, updatedAuthor);
     expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.OK);
-    expect(responseMock.json).toHaveBeenCalledWith({ message: 'Author updated' });
+    expect(responseMock.json).toHaveBeenCalledWith({
+      message: 'Author updated'
+    });
   });
 
   it(`should return status ${StatusCodes.INTERNAL_SERVER_ERROR} when an error occurs during author update`, async () => {
@@ -113,8 +126,12 @@ describe('AuthorController:', () => {
 
     await AuthorController.update(requestMock, responseMock);
 
-    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(responseMock.json).toHaveBeenCalledWith({ message: `${errorMessage} - Unable to update the author.` });
+    expect(responseMock.status).toHaveBeenCalledWith(
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+    expect(responseMock.json).toHaveBeenCalledWith({
+      message: `${errorMessage} - Unable to update the author.`
+    });
   });
 
   it(`should delete an author and return status ${StatusCodes.OK}`, async () => {
@@ -127,7 +144,9 @@ describe('AuthorController:', () => {
 
     expect(author.findByIdAndDelete).toHaveBeenCalledWith(id);
     expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.OK);
-    expect(responseMock.json).toHaveBeenCalledWith({ message: 'Author deleted' });
+    expect(responseMock.json).toHaveBeenCalledWith({
+      message: 'Author deleted'
+    });
   });
 
   it(`should return status ${StatusCodes.INTERNAL_SERVER_ERROR} when an error occurs during author deletion`, async () => {
@@ -140,8 +159,11 @@ describe('AuthorController:', () => {
 
     await AuthorController.destroy(requestMock, responseMock);
 
-    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(responseMock.json).toHaveBeenCalledWith({ message: `${errorMessage} - Unable to delete the author.` });
+    expect(responseMock.status).toHaveBeenCalledWith(
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+    expect(responseMock.json).toHaveBeenCalledWith({
+      message: `${errorMessage} - Unable to delete the author.`
+    });
   });
 });
-

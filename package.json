@@ -8,6 +8,7 @@
     "jest": "jest",
     "dev": "npx ts-node --esm server.ts",
     "lint": "eslint src/**/*.ts",
+    "prettier": "npx prettier --write src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix"
   },
   "type": "module",
@@ -28,6 +29,7 @@
     "@typescript-eslint/parser": "^6.20.0",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.1",
+    "prettier": "3.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
