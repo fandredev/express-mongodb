@@ -85,5 +85,63 @@ describe('AuthorController:', () => {
     expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
     expect(responseMock.json).toHaveBeenCalledWith({ message: `${errorMessage} - Unable to register a author.` });
   });
+
+  it(`should update an author and return status ${StatusCodes.OK}`, async () => {
+    const id = generateRandomId();
+    const updatedAuthor = { name: 'Updated Author' };
+    author.findByIdAndUpdate = jest.fn().mockResolvedValue(null);
+
+    requestMock.params = { id };
+    requestMock.body = updatedAuthor;
+
+    await AuthorController.update(requestMock, responseMock);
+
+    expect(author.findByIdAndUpdate).toHaveBeenCalledWith(id, updatedAuthor);
+    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.OK);
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'Author updated' });
+  });
+
+  it(`should return status ${StatusCodes.INTERNAL_SERVER_ERROR} when an error occurs during author update`, async () => {
+    const id = generateRandomId();
+    const updatedAuthor = { name: 'Updated Author' };
+    const errorMessage = 'Unable to update the author.';
+    const error = new Error(errorMessage);
+    author.findByIdAndUpdate = jest.fn().mockRejectedValue(error);
+
+    requestMock.params = { id };
+    requestMock.body = updatedAuthor;
+
+    await AuthorController.update(requestMock, responseMock);
+
+    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
+    expect(responseMock.json).toHaveBeenCalledWith({ message: `${errorMessage} - Unable to update the author.` });
+  });
+
+  it(`should delete an author and return status ${StatusCodes.OK}`, async () => {
+    const id = generateRandomId();
+    author.findByIdAndDelete = jest.fn();
+
+    requestMock.params = { id };
+
+    await AuthorController.destroy(requestMock, responseMock);
+
+    expect(author.findByIdAndDelete).toHaveBeenCalledWith(id);
+    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.OK);
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'Author deleted' });
+  });
+
+  it(`should return status ${StatusCodes.INTERNAL_SERVER_ERROR} when an error occurs during author deletion`, async () => {
+    const id = generateRandomId();
+    const errorMessage = 'Unable to delete the author.';
+    const error = new Error(errorMessage);
+    author.findByIdAndDelete = jest.fn().mockRejectedValue(error);
+
+    requestMock.params = { id };
+
+    await AuthorController.destroy(requestMock, responseMock);
+
+    expect(responseMock.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
+    expect(responseMock.json).toHaveBeenCalledWith({ message: `${errorMessage} - Unable to delete the author.` });
+  });
 });
 
