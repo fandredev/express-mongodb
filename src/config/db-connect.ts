@@ -7,7 +7,8 @@ export default async function connectDatabase() {
   return moongose.connection; // Return the connection
 }
 
-
 const database = await connectDatabase();
-database.on('error', (error) => console.log(`Error connecting to the database: ${error}`));
+database.on('error', (error) =>
+  console.log(`Error connecting to the database: ${error}`)
+);
 database.once('open', () => console.log('Connected to the database'));

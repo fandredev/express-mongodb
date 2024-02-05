@@ -2,15 +2,15 @@ import { author } from '../models/Author';
 import { Request, Response } from 'express';
 
 class AuthorController {
-  static async index(req: Request, res: Response) {
+  static async index(_: Request, res: Response) {
     try {
       const allAuthors = await author.find({});
       res.status(200).json(allAuthors);
-    }
-    catch (error: unknown) {
+    } catch (error: unknown) {
       if (error instanceof Error)
-        res.status(500).json({ message: `${error.message} - Unable to list authors.` });
-
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to list authors.` });
     }
   }
 
@@ -23,10 +23,11 @@ class AuthorController {
       } else {
         res.status(404).send('Author not found');
       }
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof Error)
-        res.status(500).json({ message: `${error.message} - Unable to find the author.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to find the author.` });
     }
   }
 
@@ -37,10 +38,11 @@ class AuthorController {
         message: 'Author created',
         newAuthor
       });
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof Error)
-        res.status(500).json({ message: `${error.message} - Unable to register a author.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to register a author.` });
     }
   }
 
@@ -51,7 +53,9 @@ class AuthorController {
       res.status(200).json({ message: 'Author updated' });
     } catch (error) {
       if (error instanceof Error)
-        res.status(500).json({ message: `${error.message} - Unable to update the author.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to update the author.` });
     }
   }
 
@@ -62,7 +66,9 @@ class AuthorController {
       res.status(200).json({ message: 'Author deleted' });
     } catch (error) {
       if (error instanceof Error)
-        res.status(500).json({ message: `${error.message} - Unable to delete the author.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to delete the author.` });
     }
   }
 }

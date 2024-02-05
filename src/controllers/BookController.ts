@@ -7,14 +7,13 @@ class BookController {
     try {
       const allBooks = await books.find({});
       res.status(200).json(allBooks);
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof Error)
-
-        res.status(500).json({ message: `${error.message} - Unable to list books.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to list books.` });
     }
   }
-
 
   static async show(req: Request, res: Response) {
     try {
@@ -25,11 +24,11 @@ class BookController {
       } else {
         res.status(404).send('Book not found');
       }
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof Error)
-
-        res.status(500).json({ message: `${error.message} - Unable to find the book.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to find the book.` });
     }
   }
 
@@ -42,11 +41,11 @@ class BookController {
       } else {
         res.status(404).send(`Books by ${editor} parameter not found`);
       }
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof Error)
-
-        res.status(500).json({ message: `${error.message} - Unable to find the books.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to find the books.` });
     }
   }
 
@@ -55,7 +54,8 @@ class BookController {
     try {
       const authorFound = await authors.findById(newBook.author);
       const bookComplete = {
-        ...newBook, author: {
+        ...newBook,
+        author: {
           ...authorFound?.toObject()
         }
       };
@@ -65,11 +65,11 @@ class BookController {
         message: 'Book created',
         bookCreated
       });
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof Error)
-
-        res.status(500).json({ message: `${error.message} - Unable to register a book.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to register a book.` });
     }
   }
 
@@ -80,8 +80,9 @@ class BookController {
       res.status(200).json({ message: 'Book updated' });
     } catch (error) {
       if (error instanceof Error)
-
-        res.status(500).json({ message: `${error.message} - Unable to update the book.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to update the book.` });
     }
   }
 
@@ -89,11 +90,12 @@ class BookController {
     try {
       const id = req.params.id;
       await books.findByIdAndDelete(id);
-      res.status(200)
-        .json({ message: 'Book deleted' });
+      res.status(200).json({ message: 'Book deleted' });
     } catch (error) {
       if (error instanceof Error)
-        res.status(500).json({ message: `${error.message} - Unable to delete the book.` });
+        res
+          .status(500)
+          .json({ message: `${error.message} - Unable to delete the book.` });
     }
   }
 }
